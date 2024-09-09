@@ -11,7 +11,8 @@ const RecipeDetails: React.FC = () => {
     error,
   } = useGetItems(`https://dummyjson.com/recipes/${id}`);
 
-  if (isLoading) return <p className="text-white text-center">Loading...</p>;
+  if (isLoading)
+    return <p className="mt-[15rem] bold text-center text-2xl">Loading...</p>;
   if (error)
     return <p className="text-red-500 text-center">Error loading recipe.</p>;
 
