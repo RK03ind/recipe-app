@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { ModeToggle } from "./mode-toggle"; Dark Mode Button
+import { ModeToggle } from "./mode-toggle";
 import { Filter, Search, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
       </nav>
 
-      <div className="flex justify-between items-center py-4 ">
+      <div className="flex justify-between items-center py-4 px-3 sm:px-0 ">
         <Button
           variant="outline"
           className="px-3 py-3 flex items-center"
@@ -79,38 +79,40 @@ const Navbar: React.FC<NavbarProps> = ({
           Surprise Me
           <Sparkles className="ml-2 h-4 w-4" />
         </Button>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="px-3 py-3 flex items-center">
-              <Filter className="mr-1 h-4 w-4" /> Filter:{" "}
-              {selectedFilter || "All"}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent aria-valuetext={selectedFilter}>
-            <DropdownMenuItem onClick={() => setSelectedFilter("All")}>
-              All
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Breakfast")}>
-              Breakfast
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Lunch")}>
-              Lunch
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Dinner")}>
-              Dinner
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Dessert")}>
-              Dessert
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Appetizer")}>
-              Appetizer
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedFilter("Side Dish")}>
-              Side Dish
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex gap-2">
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="px-3 py-3 flex items-center">
+                <Filter className="mr-1 h-4 w-4" /> Filter:{" "}
+                {selectedFilter || "All"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent aria-valuetext={selectedFilter}>
+              <DropdownMenuItem onClick={() => setSelectedFilter("All")}>
+                All
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Breakfast")}>
+                Breakfast
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Lunch")}>
+                Lunch
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Dinner")}>
+                Dinner
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Dessert")}>
+                Dessert
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Appetizer")}>
+                Appetizer
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelectedFilter("Side Dish")}>
+                Side Dish
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </>
   );
