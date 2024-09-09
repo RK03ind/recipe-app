@@ -1,12 +1,19 @@
 import RecipeCard from "./RecipeCard";
 import { RecipeListProps } from "@/types/Recipe";
 
-const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
+const RecipeList: React.FC<RecipeListProps> = ({ recipes, filterState }) => {
+  const filteredRecipes =
+    filterState === "all"
+      ? recipes
+      : recipes.filter((recipe) => recipe.mealType.includes(filterState));
+
   return (
     <>
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} {...recipe} />
-      ))}
+      {filteredRecipes.length > 0
+        ? filteredRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} {...recipe} />
+          ))
+        : ""}
     </>
   );
 };

@@ -87,7 +87,10 @@ const Navbar: React.FC<NavbarProps> = ({
               {selectedFilter || "All"}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent aria-valuetext={selectedFilter}>
+            <DropdownMenuItem onClick={() => setSelectedFilter("All")}>
+              All
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setSelectedFilter("Breakfast")}>
               Breakfast
             </DropdownMenuItem>

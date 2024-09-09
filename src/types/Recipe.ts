@@ -41,4 +41,5 @@ export type RecipeListProps = {
     reviewCount: number;
     mealType: string[];
   }[];
+  filterState: string;
 };

@@ -1,23 +1,14 @@
-// import React, { useState } from "react";
-// import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-
 import RecipeList from "../components/RecipeList";
-// import Filter from "../components/Filter";
-
-// import { Button } from "@/components/ui/button";
-import { useRecipesInfiniteQuery } from "@/hooks/useRecipesInfiniteQuery";
-import { useEffect, useState } from "react";
-// import { Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useRecipesInfiniteQuery } from "@/hooks/useRecipesInfiniteQuery";
+import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import useGetItems from "@/hooks/useGetItems";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
-// import { RecipeListProps } from "@/types/Recipe";
-// import { Recipe } from "@/types/Recipe";
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [searchState] = useDebounce(searchTerm, 1000);
   const {
     data,
@@ -33,32 +24,36 @@ const Home: React.FC = () => {
   );
 
   const elementRef = useIntersectionObserver({
-    onIntersect: () => fetchNextPage(),
+    onIntersect: () => (hasNextPage ? fetchNextPage() : ""),
   });
 
-  // const getNextItemData = () => {
-  //   if (!isFetchingNextPage && hasNextPage) fetchNextPage();
-  // };
-
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-0 sm:p-4">
       <Navbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
       />
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {!isSearchFetching && searchState && (
-          <RecipeList key={"search"} recipes={searchData.recipes} />
+          <RecipeList
+            key={"search"}
+            recipes={searchData.recipes}
+            filterState={selectedFilter}
+          />
         )}
 
         {!isSearchFetching &&
           !searchState &&
           data?.pages.map((page, index) => (
-            <RecipeList key={index} recipes={page.recipes} />
+            <RecipeList
+              key={index}
+              recipes={page.recipes}
+              filterState={selectedFilter}
+            />
           ))}
-        {!isSearchFetching && !searchState && <div ref={elementRef}>lol</div>}
+        {!isSearchFetching && !searchState && <div ref={elementRef}></div>}
       </div>
       {searchData?.recipes.length === 0 ? (
         <h1 className="text-center text-xl">No item found :(</h1>
@@ -76,10 +71,12 @@ const Home: React.FC = () => {
         </Button>
       )} */}
 
-      {(isFetching || isSearchFetching) && !isFetchingNextPage && (
-        <p>Loading...</p>
+      {(isFetching || isSearchFetching || isFetchingNextPage) && (
+        <h1 className="bold text-center text-xl">Loading...</h1>
       )}
-      {isError && <p>Error fetching recipes :(</p>}
+      {isError && (
+        <p className="bold text-center text-xl">Error fetching recipes :(</p>
+      )}
     </div>
   );
 };
