@@ -39,16 +39,18 @@ const RecipeCard: React.FC<Recipe> = ({
   reviewCount,
 }) => {
   return (
+    // Variant Card <Card className="transform hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl rounded-lg overflow-hidden text-white bg-gray-800 hover:shadow-[0_10px_20px_rgba(0,0,0,0.5),0_6px_6px_rgba(0,0,0,0.3)]">
+
     <Card className="transform hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl rounded-lg overflow-hidden  text-white">
       <Link to={`/recipe/${id}`}>
-        <CardHeader className="relative">
+        <CardHeader className="relative space-y-0 p-0 pb-6">
           <img src={image} alt={name} className="w-full h-48 object-cover" />
-          <div className="absolute inset-0 bg-black bg-opacity-40 hover:bg-opacity-50 transition-opacity duration-300 flex justify-center items-center">
+          <div className="absolute inset-0  bg-black bg-opacity-40 hover:bg-opacity-50 transition-opacity duration-300 flex justify-center items-center">
             <h2 className="text-white text-xl font-semibold">{name}</h2>
           </div>
         </CardHeader>
       </Link>
-      <CardContent className="p-4">
+      <CardContent className="p-4 pt-2">
         {/* Cuisine and Difficulty */}
         <div className="flex justify-between mb-2">
           <span className="text-sm text-gray-300">Cuisine: {cuisine}</span>

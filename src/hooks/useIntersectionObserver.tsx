@@ -16,7 +16,7 @@ const useIntersectionObserver = ({
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        console.log("lmao");
+        console.log("Intersection Observer Hit!");
         onIntersect();
       }
     }, options);

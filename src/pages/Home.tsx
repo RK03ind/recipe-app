@@ -8,7 +8,7 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchState] = useDebounce(searchTerm, 1000);
   const {
     data,

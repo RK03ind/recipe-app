@@ -3,7 +3,7 @@ import { RecipeListProps } from "@/types/Recipe";
 
 const RecipeList: React.FC<RecipeListProps> = ({ recipes, filterState }) => {
   const filteredRecipes =
-    filterState === "all"
+    filterState === "All"
       ? recipes
       : recipes.filter((recipe) => recipe.mealType.includes(filterState));
 
