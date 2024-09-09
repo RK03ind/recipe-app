@@ -35,7 +35,7 @@ const Home: React.FC = () => {
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
       />
-      <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="max-w-[90vw] mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-auto">
         {!isSearchFetching && searchState && (
           <RecipeList
             key={"search"}

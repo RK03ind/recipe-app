@@ -50,8 +50,7 @@ const RecipeCard: React.FC<Recipe> = ({
           </div>
         </CardHeader>
       </Link>
-      <CardContent className="p-4 pt-2">
-        {/* Cuisine and Difficulty */}
+      <CardContent className="p-4 pt-1">
         <div className="flex justify-between mb-2">
           <span className="text-sm text-gray-300">Cuisine: {cuisine}</span>
           <span className="text-sm text-gray-300">
@@ -59,13 +58,11 @@ const RecipeCard: React.FC<Recipe> = ({
           </span>
         </div>
 
-        {/* Rating and Review Count */}
         <div className="flex items-center space-x-2 text-yellow-500 mb-4">
           <span className="font-semibold">{rating.toFixed(1)}</span>
           <span className="text-sm text-gray-400">({reviewCount} reviews)</span>
         </div>
 
-        {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag) => (
             <Badge
@@ -78,7 +75,6 @@ const RecipeCard: React.FC<Recipe> = ({
           ))}
         </div>
 
-        {/* Prep and Cook Time */}
         <div className="text-gray-400">
           <p>Prep Time: {prepTimeMinutes} min</p>
           <p>Cook Time: {cookTimeMinutes} min</p>
