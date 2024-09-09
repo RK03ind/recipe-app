@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center bg-gray-900 rounded-md">
             <div
               className={`flex items-center transition-all duration-300 ${
-                searchOpen ? "w-full  md:w-64 lg:w-80" : "w-0"
+                searchOpen ? "w-32  md:w-64 lg:w-80" : "w-0"
               } overflow-hidden`}
             >
               {searchOpen && (
