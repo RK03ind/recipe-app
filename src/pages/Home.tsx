@@ -4,13 +4,14 @@
 import RecipeList from "../components/RecipeList";
 // import Filter from "../components/Filter";
 
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { useRecipesInfiniteQuery } from "@/hooks/useRecipesInfiniteQuery";
 import { useEffect, useState } from "react";
 // import { Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useDebounce } from "use-debounce";
 import useGetItems from "@/hooks/useGetItems";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 // import { RecipeListProps } from "@/types/Recipe";
 // import { Recipe } from "@/types/Recipe";
 
@@ -31,11 +32,13 @@ const Home: React.FC = () => {
     `https://dummyjson.com/recipes/search?q=${searchState}`
   );
 
-  useEffect(() => {
-    if (!isFetching) {
-      console.log(data?.pages.flatMap((page) => page.recipes));
-    }
-  }, [isFetching, data]);
+  const elementRef = useIntersectionObserver({
+    onIntersect: () => fetchNextPage(),
+  });
+
+  // const getNextItemData = () => {
+  //   if (!isFetchingNextPage && hasNextPage) fetchNextPage();
+  // };
 
   return (
     <div className="container mx-auto p-4">
@@ -55,11 +58,15 @@ const Home: React.FC = () => {
           data?.pages.map((page, index) => (
             <RecipeList key={index} recipes={page.recipes} />
           ))}
-
-        {searchData.recipes.length === 0 ? <h1>No item found :(</h1> : ""}
+        {!isSearchFetching && !searchState && <div ref={elementRef}>lol</div>}
       </div>
+      {searchData?.recipes.length === 0 ? (
+        <h1 className="text-center text-xl">No item found :(</h1>
+      ) : (
+        ""
+      )}
 
-      {hasNextPage && (
+      {/* {hasNextPage && (
         <Button
           onClick={() => fetchNextPage()}
           className="mt-4"
@@ -67,7 +74,7 @@ const Home: React.FC = () => {
         >
           {isFetchingNextPage ? "Loading more..." : "Load More"}
         </Button>
-      )}
+      )} */}
 
       {(isFetching || isSearchFetching) && !isFetchingNextPage && (
         <p>Loading...</p>

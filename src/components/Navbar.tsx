@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ModeToggle } from "./mode-toggle";
+// import { ModeToggle } from "./mode-toggle"; Dark Mode Button
 import { Filter, Search, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({
   selectedFilter,
   setSelectedFilter,
 }) => {
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSurpriseMe = () => {

@@ -15,7 +15,7 @@ export const useRecipesInfiniteQuery = () => {
     queryKey: ["recipe-pagination"],
     queryFn: fetchRecipes,
     getNextPageParam: (lastPage) => {
-      return lastPage.skip + 10;
+      return lastPage.skip === 50 ? lastPage : lastPage.skip + 10;
     },
     initialPageParam: 0,
   });
